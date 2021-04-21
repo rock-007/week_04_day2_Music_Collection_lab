@@ -9,12 +9,8 @@ import repositories.artist_repository as artist_repository
 
 def save(album):
     sql = "INSERT INTO albums(title, genre, artist_id) VALUES (%s, %s, %s) RETURNING *"
-    #pdb.set_trace()
-
     values= [album.title, album.genre, album.artist.id]
-
     results = run_sql(sql,values)
-
     album.id = results[0]['id']
     return album
 
@@ -27,10 +23,7 @@ def delete_all():
 #SELECT_BY_ID_AND_RETURN_RELEVANT_ALBUMS   
 
 def select_by_id(id):
-    #album = None
     sql ="SELECT * FROM albums where artist_id = %s"
-    #print(album)
-    #pdb.set_trace()
     value = [id]
     result= run_sql(sql, value)
     albums= []
